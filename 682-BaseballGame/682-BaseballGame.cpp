@@ -1,33 +1,34 @@
-// Last updated: 1/24/2026, 4:16:44 PM
-1class Solution {
+// Last updated: 1/25/2026, 7:19:05 PM
+1class MinStack {
 2public:
-3    int calPoints(vector<string>& operations) {
-4        stack<int> s;
-5        for (auto x : operations) {
-6            if (x == "C") {
-7                s.pop();
-8            }
-9
-10            else if(x == "D") {
-11                int a = s.top();
-12                s.push(a * 2);
-13            }
-14            else if(x == "+") {
-15                int a = s.top();
-16                s.pop();
-17                int b = s.top();
-18                s.push(a);
-19                s.push(a + b);
-20            }
-21            else {
-22                s.push(stoi(x));
-23            }
-24        }
-25        int ans = 0;
-26        while (!s.empty()) {
-27            ans += s.top();
-28            s.pop();
-29        }
-30        return ans;
-31    }
-32};
+3    stack<int> st;
+4    stack<int> minSt;
+5
+6    MinStack() {}
+7
+8    void push(int val) {
+9        st.push(val);
+10        if (minSt.empty())
+11            minSt.push(val);
+12        else
+13            minSt.push(min(val, minSt.top()));
+14    }
+15
+16    void pop() {
+17        st.pop();
+18        minSt.pop();
+19    }
+20
+21    int top() { return st.top(); }
+22
+23    int getMin() { return minSt.top(); }
+24};
+25
+26/**
+27 * Your MinStack object will be instantiated and called as such:
+28 * MinStack* obj = new MinStack();
+29 * obj->push(val);
+30 * obj->pop();
+31 * int param_3 = obj->top();
+32 * int param_4 = obj->getMin();
+33 */
