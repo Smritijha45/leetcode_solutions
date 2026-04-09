@@ -1,22 +1,22 @@
-// Last updated: 4/9/2026, 10:12:04 AM
+// Last updated: 4/9/2026, 11:04:16 PM
 1class Solution {
 2public:
-3    int longestCommonSubsequence(string text1, string text2) {
-4        int n = text1.size();
-5        int m = text2.size();
-6
-7        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
-8
-9        for (int i = 1; i <= n; i++) {
-10            for (int j = 1; j <= m; j++) {
-11                if (text1[i - 1] == text2[j - 1]) {
-12                    dp[i][j] = 1 + dp[i - 1][j - 1];
-13                } else {
-14                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-15                }
+3    int romanToInt(string s) {
+4        unordered_map<char, int> mp = {{'I', 1},   {'V', 5},   {'X', 10},
+5                                       {'L', 50},  {'C', 100}, {'D', 500},
+6                                       {'M', 1000}};
+7
+8        int ans = 0;
+9
+10        for (int i = 0; i < s.length(); i++) {
+11
+12            if (i + 1 < s.length() && mp[s[i]] < mp[s[i + 1]]) {
+13                ans -= mp[s[i]];
+14            } else {
+15                ans += mp[s[i]];
 16            }
 17        }
 18
-19        return dp[n][m];
+19        return ans;
 20    }
 21};
