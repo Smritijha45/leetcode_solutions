@@ -1,4 +1,4 @@
-// Last updated: 4/10/2026, 11:47:50 PM
+// Last updated: 4/10/2026, 11:48:03 PM
 1class Solution {
 2public:
 3    int findContentChildren(vector<int>& g, vector<int>& s) {
